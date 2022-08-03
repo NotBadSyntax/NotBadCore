@@ -27,11 +27,6 @@ public class DatabaseConnection {
     }
 
     public void connect() {
-
-        if (Strings.isNullOrEmpty(info.getHost())) {
-            throw new IllegalStateException("MySQL Connection not configured. Cannot continue.");
-        }
-
         this.hikari = new HikariDataSource();
         hikari.setDataSourceClassName("com.mysql.cj.jdbc.MysqlDataSource");
 
