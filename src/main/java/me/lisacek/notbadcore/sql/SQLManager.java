@@ -1,18 +1,15 @@
 package me.lisacek.notbadcore.sql;
 
 import com.google.gson.JsonObject;
-import jdk.internal.net.http.common.Pair;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SQLManager {
 
-    private static final SQLManager INSTANCE = new SQLManager();
+    private final List<DatabaseConnection> connections = new ArrayList<>();
 
-    private final Map<String, DatabaseConnection> connections = new HashMap<>();
-
-    public Pair<String, DatabaseConnection> createConnection(JsonObject info, boolean readOnly) {
+    public DatabaseConnection createConnection(JsonObject info, boolean readOnly) {
         ConnectionInfo connectionInfo = ConnectionInfo.load(info);
 
         if (connectionInfo == null) {
@@ -25,20 +22,12 @@ public class SQLManager {
         } catch (IllegalStateException e) {
             return null;
         }
-        String uuid = java.util.UUID.randomUUID().toString();
-        connections.put(uuid, connection);
-        return new Pair<>(uuid, connection);
+        connections.add(connection);
+        return connection;
     }
 
     public void close() {
-        connections.values().forEach(DatabaseConnection::close);
+        connections.forEach(DatabaseConnection::close);
     }
 
-    public DatabaseConnection getConnection(String uuid) {
-        return connections.get(uuid);
-    }
-
-    public static SQLManager getInstance() {
-        return INSTANCE;
-    }
 }
