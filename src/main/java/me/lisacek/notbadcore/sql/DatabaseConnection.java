@@ -37,6 +37,7 @@ public class DatabaseConnection {
         hikari.addDataSourceProperty("user", info.getUser());
         hikari.addDataSourceProperty("password", info.getPassword());
         hikari.addDataSourceProperty("characterEncoding", "utf8");
+        hikari.addDataSourceProperty("poolName", "NotBadCorePool");
         try {
             hikari.validate();
         } catch (IllegalStateException e) {

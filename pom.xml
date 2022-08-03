@@ -6,7 +6,7 @@
 
     <groupId>me.lisacek</groupId>
     <artifactId>NotBadCore</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>NotBadCore</name>
@@ -95,6 +95,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.14.1</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>

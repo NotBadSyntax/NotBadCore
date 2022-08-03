@@ -1,13 +1,17 @@
 package me.lisacek.notbadcore;
 
-import lombok.Getter;
+import me.lisacek.notbadcore.filters.LogFilter;
 
 public class NotBadCore {
 
     private static final NotBadCore INSTANCE = new NotBadCore();
 
-    @Getter
-    private final String version = "1.0.1-SNAPSHOT";
+    private NotBadCore() {
+    }
+
+    public void hook() {
+        LogFilter.registerFilter();
+    }
 
     public static NotBadCore getInstance() {
         return INSTANCE;
